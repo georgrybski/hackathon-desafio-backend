@@ -1,14 +1,18 @@
 package com.stefanini.resources;
 
+import com.stefanini.dto.RegistrarJogadorDTO;
 import com.stefanini.entity.Jogador;
 import com.stefanini.service.JogadorService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@ApplicationPath("/jogador")
+@Path("/jogador")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class JogadorResource {
 
     @Inject
@@ -27,22 +31,22 @@ public class JogadorResource {
     }
 
     @POST
-    public Response salvar(@Valid Jogador jogador) {
+    public Response salvar(@Valid RegistrarJogadorDTO jogador) {
         jogadorService.salvar(jogador);
         return Response.status(Response.Status.CREATED).build();
     }
 
-    @POST
+    @PUT
     public Response alterar(@Valid Jogador jogador) {
         jogadorService.alterar(jogador);
         return Response.status(Response.Status.OK).build();
     }
 
-    @POST
+    @DELETE
     @Path("/{id}")
     public Response deletar(@PathParam("id") Long id) {
         jogadorService.deletar(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
-
 }
+

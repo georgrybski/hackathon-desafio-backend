@@ -3,13 +3,10 @@ package com.stefanini.resources;
 import com.stefanini.service.StefamonService;
 
 import javax.inject.Inject;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@ApplicationPath("/stefamon")
+@Path("/stefamon")
 public class StefamonResource {
 
     @Inject
@@ -27,4 +24,9 @@ public class StefamonResource {
         return Response.status(Response.Status.OK).entity(service.pegarPorId(id)).build();
     }
 
+    @PUT
+    @Path("/comprar")
+    public Response comprar(@QueryParam("id") Long id, @QueryParam("nickname") String nickname) {
+        return Response.status(Response.Status.OK).entity(service.comprar(id, nickname)).build();
+    }
 }
