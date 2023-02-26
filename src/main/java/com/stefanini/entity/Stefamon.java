@@ -37,6 +37,18 @@ public class Stefamon {
     @Column(nullable = false)
     private String urlFoto;
 
+    public boolean isAlive() {
+        return vida > 0;
+    }
+
+    public void recieveDamage(Integer damage) {
+        vida -= damage;
+    }
+
+    public void attack(Stefamon stefamon) {
+        stefamon.recieveDamage(ataque);
+    }
+
     public Long getId() {
         return id;
     }
